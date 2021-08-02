@@ -286,6 +286,10 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_y,           externalpipe,   {.v = copyurlcmd } },
 	{ MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
 	{ MODKEY,               XK_n,           externalpipe,   {.v = editscreen } },
+	{ ControlMask,          XK_f,           kexecsh,	{.s = "vf"} },
+	{ ControlMask,          XK_g,           kexecsh,	{.s = "cv"} },
+	{ ControlMask|ShiftMask,XK_F,           kexecsh,	{.s = "vff"} },
+	{ ControlMask|ShiftMask,XK_G,           kexecsh,	{.s = "ccv"} },
 };
 
 /*

@@ -735,6 +735,21 @@ execsh(char *cmd, char **args)
 	_exit(1);
 }
 
+void kexecsh(const Arg* a)
+{
+	char buf[strlen(a->s)+2];
+	snprintf(buf, sizeof buf, "%s%s", a->s, "\n");
+	ttywrite(buf, sizeof buf, 0);
+}
+
+void
+kwrite(const Arg* a)
+{
+	char buf[strlen(a->s)+1];
+	snprintf(buf, sizeof buf, "%s", a->s);
+	ttywrite(buf, sizeof buf, 0);
+}
+
 void
 sigchld(int a)
 {
