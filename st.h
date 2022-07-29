@@ -88,6 +88,7 @@ void draw(void);
 //Custom functions
 void kwrite(const Arg *);
 void kexecsh(const Arg *);
+/* void execsh_wrapper(const Arg *); */
 void externalpipe(const Arg *);
 void kscrolldown(const Arg *);
 void kscrollup(const Arg *);

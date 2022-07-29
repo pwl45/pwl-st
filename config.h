@@ -5,9 +5,9 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "mono:pixelsize=16:antialias=true:autohint=true";
+static char *font = "mono:pixelsize=14:antialias=true:autohint=true";
 static char *font2[] = { "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
-static int borderpx = 2;
+static int borderpx = 1;
 
 /*
  * What program is execed by st depends of these precedence rules:
@@ -246,6 +246,7 @@ static char *openurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -o", "externalpipe
 static char *copyurlcmd[] = { "/bin/sh", "-c", "st-urlhandler -c", "externalpipe", NULL };
 static char *copyoutput[] = { "/bin/sh", "-c", "st-copyout", "externalpipe", NULL };
 static char *editscreen[] = { "/bin/sh", "-c", "st-editscreen", "externalpipe", NULL };
+static char *stdcmd[] = { "/bin/sh", "st", "-d", ".", NULL};
 
 
 static Shortcut shortcuts[] = {
@@ -285,12 +286,12 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_l,           externalpipe,   {.v = openurlcmd } },
 	/* { MODKEY,               XK_y,           externalpipe,   {.v = copyurlcmd } }, */
 	{ MODKEY,               XK_o,           externalpipe,   {.v = copyoutput } },
-	{ MODKEY,               XK_n,           externalpipe,   {.v = editscreen } },
+	/* { Mod4Mask|ControlMask, XK_Return,      externalpipe,   {.v = editscreen } }, */
+	/* { Mod4Mask|ControlMask, XK_c,           externalpipe,   {.v = editscreen } }, */
 	/* { ControlMask,          XK_f,           kexecsh,	{.s = "vf"} }, */
 	/* { ControlMask,          XK_g,           kexecsh,	{.s = "cv"} }, */
 	/* { ControlMask|ShiftMask,XK_F,           kexecsh,	{.s = "vff"} }, */
 	/* { ControlMask|ShiftMask,XK_G,           kexecsh,	{.s = "ccv"} }, */
-	{ TERMMOD|ShiftMask,    XK_L,      kexecsh,	{.s = "st -d ."} },
 };
 
 /*
@@ -425,6 +426,11 @@ static Key key[] = {
 	{ XK_Right,         XK_ANY_MOD,     "\033OC",        0,   +1},
 	{ XK_ISO_Left_Tab,  ShiftMask,      "\033[Z",        0,    0},
 	{ XK_Return,        Mod1Mask,       "\033\r",        0,    0},
+
+	/* NONSTANDARD: remapping C-Enter and S-Enter... maybe this is a bad idea? don't really care*/
+	{ XK_Return,        ShiftMask,      "\033[13;2u",    0,    0},
+	{ XK_Return,        ControlMask,    "\033[13;5u",    0,    0},
+	     
 	{ XK_Return,        XK_ANY_MOD,     "\r",            0,    0},
 	{ XK_Insert,        ShiftMask,      "\033[4l",      -1,    0},
 	{ XK_Insert,        ShiftMask,      "\033[2;2~",    +1,    0},
@@ -439,6 +445,10 @@ static Key key[] = {
 	{ XK_Delete,        XK_ANY_MOD,     "\033[P",       -1,    0},
 	{ XK_Delete,        XK_ANY_MOD,     "\033[3~",      +1,    0},
 	{ XK_BackSpace,     XK_NO_MOD,      "\177",          0,    0},
+
+	/* NONSTANDARD: remapping S-Backspace to be the same as backspace. Otherwise it becomes C-h for some reason*/
+	{ XK_BackSpace,     ShiftMask,      "\177",          0,    0},
+
 	{ XK_BackSpace,     Mod1Mask,       "\033\177",      0,    0},
 	{ XK_Home,          ShiftMask,      "\033[2J",       0,   -1},
 	{ XK_Home,          ShiftMask,      "\033[1;2H",     0,   +1},

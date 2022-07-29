@@ -684,9 +684,38 @@ die(const char *errstr, ...)
 	exit(1);
 }
 
+//todo: make this usable
+/* void */ 
+/* execsh_wrapper(const Arg* a) */
+/* { */
+
+/*     printf("%s\n",getenv("PWD")); */
+/*     return; */
+/*     char** command = (char **) (a->v); */
+/*     char* executable = command[0]; */
+/*     char** arguments = &(command[1]); */
+
+/*     printf("cmd: %s\n",executable); */
+
+/*     int i = 0; */
+/*     char* curr_arg = arguments[i]; */
+/*     while(curr_arg != NULL){ */
+/* 	printf("%s\n",curr_arg); */	
+/* 	i++; */
+/* 	curr_arg = arguments[i]; */
+/*     } */
+
+
+/*     execsh(executable,arguments); */
+/*     return; */
+/* } */
+
 void
 execsh(char *cmd, char **args)
 {
+	/* printf("%s\n",cmd); */
+	/* printf("%s\n",args[0]); */
+	/* printf("%s\n",args[1]); */
 	char *sh, *prog, *arg;
 	const struct passwd *pw;
 
@@ -732,6 +761,7 @@ execsh(char *cmd, char **args)
 	signal(SIGTERM, SIG_DFL);
 	signal(SIGALRM, SIG_DFL);
 
+	/* printf("%s\n",prog); */
 	execvp(prog, args);
 	_exit(1);
 }

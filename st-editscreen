@@ -10,6 +10,7 @@ sed -i 's/\x0//g' "$tmpfile"
 echo $EDITOR
 # st -e "nvim" "$tmpfile"
 devour st -e nvim -c 'norm GggG' "$tmpfile"
+# nvim "$tmpfile"
 # cat $tmpfile
 # echo $tmpfile
 # exit 1

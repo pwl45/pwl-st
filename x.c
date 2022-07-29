@@ -287,6 +287,7 @@ clipcopy(const Arg *dummy)
 	xsel.clipboard = NULL;
 
 	if (xsel.primary != NULL) {
+		printf("in if block\n");
 		xsel.clipboard = xstrdup(xsel.primary);
 		clipboard = XInternAtom(xw.dpy, "CLIPBOARD", 0);
 		XSetSelectionOwner(xw.dpy, clipboard, xw.win, CurrentTime);
@@ -296,11 +297,13 @@ clipcopy(const Arg *dummy)
 void
 clippaste(const Arg *dummy)
 {
+	printf("clippaste\n");
 	Atom clipboard;
 
 	clipboard = XInternAtom(xw.dpy, "CLIPBOARD", 0);
 	XConvertSelection(xw.dpy, clipboard, xsel.xtarget, clipboard,
 			xw.win, CurrentTime);
+	printf("end clippaste\n");
 }
 
 void
