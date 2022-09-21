@@ -3,13 +3,14 @@ tmpfile=$(mktemp /tmp/st-cmd-output.XXXXXX.term)
 # cat $tmpfile
 trap 'rm "$tmpfile"' 0 1 15
 cat $tmpfile
-sed -n "w $tmpfile"
+cat > "$tmpfile"
 # cat $tmpfile
 sed -i 's/\x0//g' "$tmpfile"
 # cat $tmpfile
 echo $EDITOR
 # st -e "nvim" "$tmpfile"
 devour st -e nvim -c 'norm GggG' "$tmpfile"
+
 # nvim "$tmpfile"
 # cat $tmpfile
 # echo $tmpfile

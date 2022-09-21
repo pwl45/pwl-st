@@ -242,6 +242,7 @@ static Rune utfmax[UTF_SIZ + 1] = {0x10FFFF, 0x7F, 0x7FF, 0xFFFF, 0x10FFFF};
 ssize_t
 xwrite(int fd, const char *s, size_t len)
 {
+	/* printf("%s\n",s); */
 	size_t aux = len;
 	ssize_t r;
 
@@ -2126,8 +2127,8 @@ externalpipe(const Arg *arg)
 		lastpos = MIN(tlinehistlen(n) + 1, term.col) - 1;
 		if (lastpos < 0)
 			break;
-        if (lastpos == 0)
-            continue;
+		if (lastpos == 0)
+			continue;
 		end = &bp[lastpos + 1];
 		for (; bp < end; ++bp)
 			if (xwrite(to[1], buf, utf8encode(bp->u, buf)) < 0)
